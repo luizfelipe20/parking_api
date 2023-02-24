@@ -7,7 +7,7 @@
 ## Como rodar o projeto?
 
 * Clone esse repositório.
-* Rode o comando cp local.env .env para criar o arquivo .env com as configurações do ambiente local
+* Rode o comando cp local.env .env (cria o arquivo .env com as configurações do ambiente local)
 * Utilize o comandos de ajuda do Makefile
 
 
