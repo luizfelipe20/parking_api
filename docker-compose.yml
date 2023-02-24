@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: parking_control_postgres
+    image: postgres:14-alpine
+    env_file:
+      - ./.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - parking-control-app-network
+
+  pgadmin:
+    container_name: parking_control_pgadmin
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+    env_file:
+      - ./.env
+    ports:
+      - 5051:80
+    networks:
+      - parking-control-app-network
+
+  web:
+    container_name: parking_control_app
+    build:
+      context: .
+      target: development_build
+    hostname: app
+    stdin_open: true
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - parking-control-app-network
+
+volumes:
+  pgdata:
+  pgadmin:
+
+networks:
+  parking-control-app-network:
