@@ -15,5 +15,7 @@
 
 * make build para buildar o projeto
 * make up para subir o serviço e o banco de dados.
+* make migrations para criar as migrações
+* make migrate para aplicar as migrações
 * make test para rodar os test
 
