@@ -29,7 +29,6 @@ class Historic(models.Model):
     def period(self):
         _period = ""
         if self.departure_time:
-            # import ipdb; ipdb.set_trace()
             _period = (self.departure_time - self.entry_time).total_seconds()
             return str(timedelta(seconds=_period))
         return _period
